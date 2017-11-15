@@ -14,9 +14,7 @@ namespace KursSklep.Controllers
 
         public ActionResult Index()
         {
-           // Kategoria kategoria = new Kategoria { NazwaKategorii ="asp.net MVC", NazwaPlikuIkony = "aspNetMVC.png", OpisKategorii = "opis"};
-           // db.Kategorie.Add(kategoria);
-           // db.SaveChanges();
+            var listaKategorii = db.Kategorie.ToList();
 
             return View();
         }
