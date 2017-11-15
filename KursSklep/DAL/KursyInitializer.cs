@@ -1,21 +1,18 @@
-﻿using KursSklep.Models;
+﻿using KursSklep.Migrations;
+using KursSklep.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 
 namespace KursSklep.DAL
 {
-    public class KursyInitializer : DropCreateDatabaseAlways<KursyContext>
+    public class KursyInitializer : MigrateDatabaseToLatestVersion<KursyContext,Configuration>
     {
-        protected override void Seed(KursyContext context)
-        {
-            SeedKursyData(context);
-            base.Seed(context);
-        }
 
-        private void SeedKursyData(KursyContext context)
+        public static void SeedKursyData(KursyContext context)
         {
             var kategorie = new List<Kategoria>
             {
@@ -27,7 +24,7 @@ namespace KursSklep.DAL
                 new Kategoria() { KategoriaId = 6, NazwaKategorii = "html", NazwaPlikuIkony = "html.png", OpisKategorii = "opis html" }
             };
 
-            kategorie.ForEach(k => context.Kategorie.Add(k));
+            kategorie.ForEach(k => context.Kategorie.AddOrUpdate(k));
             context.SaveChanges();
 
             var kursy = new List<Kurs>
@@ -35,7 +32,7 @@ namespace KursSklep.DAL
                 new Kurs(){ KursId = 1, AutorKursu = "Janek", KategoriaId = 1, OpisKursu = "opis kursu 1", TytulKursu = "Tytul kursu 1", Bestseller = true, NazwaPlikuObrazka = "kurs1.png", CenaKursu = 100, DataDodania = new DateTime(2017, 1, 18) },
                 new Kurs(){ KursId = 2, AutorKursu = "Paweł", KategoriaId = 2, OpisKursu = "opis kursu 2", TytulKursu = "Tytul kursu 2", Bestseller = true, NazwaPlikuObrazka = "kurs2.png", CenaKursu = 120, DataDodania = new DateTime(2017, 2, 18) },
             };
-            kursy.ForEach(k => context.Kursy.Add(k));
+            kursy.ForEach(k => context.Kursy.AddOrUpdate(k));
             context.SaveChanges();
         }
     }
