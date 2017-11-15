@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KursSklep.DAL;
+using KursSklep.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +10,14 @@ namespace KursSklep.Controllers
 {
     public class HomeController : Controller
     {
+        private KursyContext db = new KursyContext();
+
         public ActionResult Index()
         {
+           // Kategoria kategoria = new Kategoria { NazwaKategorii ="asp.net MVC", NazwaPlikuIkony = "aspNetMVC.png", OpisKategorii = "opis"};
+           // db.Kategorie.Add(kategoria);
+           // db.SaveChanges();
+
             return View();
         }
 
